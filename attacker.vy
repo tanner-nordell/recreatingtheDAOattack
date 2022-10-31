@@ -48,7 +48,7 @@ def __default__():
     # TODO: Add code here to complete the recursive call
 
     #T I need to withdraw here. this is the 'fallback function'
-    if dao_address.balance >= 1 ether:
+    if dao_address.balance >= 1:
         DAO(self.dao_address).withdraw()
 
     pass
