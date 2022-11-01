@@ -49,6 +49,7 @@ def __default__():
 
     #T I need to withdraw here. this is the 'fallback function'
     if self.dao_address.balance >= 1:
-        DAO(self.dao_address).withdraw()
+        self._attack()
+        #DAO(self.dao_address).withdraw()
 
     pass
